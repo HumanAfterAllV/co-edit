@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { RoomProvider, ClientSideSuspense } from "@liveblocks/react";
 import {
     SignInButton,
@@ -9,17 +10,16 @@ import {
     UserButton
 } from '@clerk/nextjs'
 
+import { updateDocument } from "@/lib/actions/room.actions";
+
 import { Input } from "./ui/input";
+
 import { Editor } from "@/components/editor/Editor";
 import Header from "@/components/Header";
 import ActiveCollaborators from "./ActiveCollaborators";
-import Image from "next/image";
-import { updateDocument } from "@/lib/actions/room.actions";
 import Loader from "./Loader";
 
-export default function Collaborative({roomId, roomMetadata} : CollaborativeRoomProps): React.JSX.Element {
-
-    const currentUserType = "editor";
+export default function Collaborative({roomId, roomMetadata, users, currentUserType} : CollaborativeRoomProps): React.JSX.Element {
 
     const [documentTitle, setDocumentTitle] = useState<string>(roomMetadata.title);
     const [editing, setEditing] = useState<boolean>(false);
@@ -119,7 +119,7 @@ export default function Collaborative({roomId, roomMetadata} : CollaborativeRoom
                             </SignedIn>
                         </div>
                     </Header>
-                    <Editor />
+                    <Editor roomId={roomId} currentUserType={currentUserType}/>
                 </div>
             </ClientSideSuspense>
         </RoomProvider>
