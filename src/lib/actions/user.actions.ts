@@ -1,6 +1,6 @@
 "use server";
 
-import { clerkClient } from '@clerk/express'
+import { clerkClient } from '@clerk/clerk-sdk-node'
 import { parseStringify } from "../utils";
 
 

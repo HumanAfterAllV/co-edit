@@ -15,6 +15,7 @@ import Header from "@/components/Header";
 import ActiveCollaborators from "./ActiveCollaborators";
 import Image from "next/image";
 import { updateDocument } from "@/lib/actions/room.actions";
+import Loader from "./Loader";
 
 export default function Collaborative({roomId, roomMetadata} : CollaborativeRoomProps): React.JSX.Element {
 
@@ -71,7 +72,7 @@ export default function Collaborative({roomId, roomMetadata} : CollaborativeRoom
 
     return(
         <RoomProvider id={roomId}>
-            <ClientSideSuspense fallback={<div>Loading…</div>}>
+            <ClientSideSuspense fallback={<Loader />}>
                 <div className="collaborative-room">
                     <Header>
                         <div ref={containerRef} className="flex w-fit items-center justify-center gap-2">

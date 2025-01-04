@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { nanoid } from 'nanoid';
 
-import { liveblocks } from '../liveblocks';
+import { liveblocks } from '../liveblocks'; // Ensure this import is correct and the module exists
 import { parseStringify } from '../utils';
 
 export const createDocument = async({ userId, email }: CreateDocumentParams) => {
@@ -16,13 +16,14 @@ export const createDocument = async({ userId, email }: CreateDocumentParams) => 
             title: "Untitled",
         }
 
-        const userAccesses: RoomAccesses = {
+        const usersAccesses: RoomAccesses = {
             [email]: ["room:write"],
         }
+        
         const room = await liveblocks.createRoom(roomId, {
             metadata,
-            userAccesses,
-            defaultAccesses: ["room:write"],
+            usersAccesses: usersAccesses,
+            defaultAccesses: [],
         });
 
         revalidatePath("/");
@@ -67,11 +68,13 @@ export const updateDocument = async (roomId: string, title: string) => {
 
 export const getDocuments = async (email: string) => {
     try{
-        const rooms = await liveblocks.getRooms({userId: email})
+        const rooms = await liveblocks.getRooms();
+        const filteredRooms = rooms.data.filter((room: any) => room.metadata.email === email);
 
-        return parseStringify(rooms);
+        return { data: filteredRooms };
     }
     catch(error){
         console.error(`Error happened while getting rooms: ${error}`);
+        return { data: [] };
     }
 }

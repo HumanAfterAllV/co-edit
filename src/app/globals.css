@@ -100,7 +100,7 @@
   }
 
   .document-list-title {
-    @apply max-w-[730px] items-end flex w-full justify-between;
+    @apply max-w-[730px] flex flex-col items-center w-full justify-between gap-4;
   }
 
   .document-list-item {

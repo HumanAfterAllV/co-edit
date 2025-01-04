@@ -11,7 +11,8 @@ export default async function Document({params : { id }}: SearchParamProps): Pro
 
     const room = await getDocument({
         roomId: id,
-        userId: clerkUser.emailAddresses[0].emailAddress
+        userId: clerkUser.emailAddresses[0].emailAddress,
+        
     });
 
     if(!room) redirect("/");
