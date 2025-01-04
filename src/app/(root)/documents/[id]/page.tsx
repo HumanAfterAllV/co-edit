@@ -27,8 +27,9 @@ export default async function Document({params : { id }}: SearchParamProps): Pro
 
     }))
 
-    const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes("room:write") ? "editor" : "viewer";
+    const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
+    console.log(userIds, users, userData, currentUserType)
     return( 
         <main className="flex w-full flex-col items-center">
             <Collaborative roomId={id} roomMetadata={room.metadata} users={userData} currentUserType={currentUserType}/>            

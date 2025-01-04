@@ -23,7 +23,7 @@ export const createDocument = async({ userId, email }: CreateDocumentParams) => 
         const room = await liveblocks.createRoom(roomId, {
             metadata,
             usersAccesses: usersAccesses,
-            defaultAccesses: [],
+            defaultAccesses: ["room:write"],
         });
 
         revalidatePath("/");
@@ -48,6 +48,7 @@ export const getDocument = async ({roomId, userId} : {roomId: string, userId: st
     }
     catch(error){
         console.error(`Error getting a document: ${error}`);
+        throw error;
     }
 }
 
@@ -58,7 +59,7 @@ export const updateDocument = async (roomId: string, title: string) => {
                 title
             }
         });
-        revalidatePath("/documents/${roomId}");
+        revalidatePath(`/documents/${roomId}`);
         return parseStringify(updatedRoom);
     }
     catch(error){
@@ -77,4 +78,4 @@ export const getDocuments = async (email: string) => {
         console.error(`Error happened while getting rooms: ${error}`);
         return { data: [] };
     }
-}
+}   

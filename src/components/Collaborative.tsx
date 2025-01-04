@@ -70,6 +70,7 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
         }
     })
 
+
     return(
         <RoomProvider id={roomId}>
             <ClientSideSuspense fallback={<Loader />}>
