@@ -18,6 +18,7 @@ import { Editor } from "@/components/editor/Editor";
 import Header from "@/components/Header";
 import ActiveCollaborators from "./ActiveCollaborators";
 import Loader from "./Loader";
+import ShareModal from "./ShareModal";
 
 export default function Collaborative({roomId, roomMetadata, users, currentUserType} : CollaborativeRoomProps): React.JSX.Element {
 
@@ -111,7 +112,13 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
                             )}
                         </div>
                         <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
-                            <ActiveCollaborators />
+                            <ActiveCollaborators/>
+                            <ShareModal 
+                                roomId={roomId} 
+                                collaborators={users} 
+                                creatorId={roomMetadata.creatorId}
+                                currentUserType={currentUserType} 
+                            />
                             <SignedOut>
                                 <SignInButton />
                             </SignedOut>

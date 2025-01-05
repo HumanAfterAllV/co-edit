@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import Theme from './plugins/Theme';
-import ToolbarPlugin from './plugins/ToolbarPlugin';
 import { HeadingNode } from '@lexical/rich-text';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -11,10 +9,13 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin } from "@liveblocks/react-lexical"
-import Loader from '../Loader';
-import FloatingToolbar from './plugins/FloatingToolBar';
 import { useSyncStatus } from "@liveblocks/react";
 import { useThreads } from '@liveblocks/react/suspense';
+
+import Theme from './plugins/Theme';
+import ToolbarPlugin from './plugins/ToolbarPlugin';
+import FloatingToolbar from './plugins/FloatingToolBar';
+import Loader from '../Loader';
 import Comments from '../Comments';
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -40,11 +41,8 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
       throw error;
     },
     theme: Theme,
-    editable: true,
   });
   
-  console.log(currentUserType)
-
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
