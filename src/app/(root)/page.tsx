@@ -10,6 +10,7 @@ import { dateConverter } from "@/lib/utils";
 import Header from "@/components/Header";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
 import DeleteModal from "@/components/DeleteModal";
+import Notifications from "@/components/Notifications";
 
 export default async function Home(): Promise<React.JSX.Element> {
     const clerkUser = await currentUser();
@@ -22,7 +23,7 @@ export default async function Home(): Promise<React.JSX.Element> {
         <main className="home-container">
             <Header className="sticky top-0 left-0">
                 <div className="flex items-center gap-2 lg:gap-4 ">
-                    Notification 
+                    <Notifications /> 
                     <SignedIn>
                         <UserButton />
                     </SignedIn>

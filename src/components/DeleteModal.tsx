@@ -12,8 +12,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
 import { useState } from "react";
 import { deleteDocument } from "@/lib/actions/room.actions";
 

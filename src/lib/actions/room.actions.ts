@@ -30,7 +30,7 @@ export const createDocument = async({ userId, email }: CreateDocumentParams) => 
         revalidatePath("/");
         return parseStringify(room);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error creating a room: ${error}`);
     }
 }
@@ -47,9 +47,8 @@ export const getDocument = async ({roomId, userId} : {roomId: string, userId: st
     
         return parseStringify(room);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error getting a document: ${error}`);
-        redirect("/");
     }
 }
 
@@ -63,7 +62,7 @@ export const updateDocument = async (roomId: string, title: string) => {
         revalidatePath(`/documents/${roomId}`);
         return parseStringify(updatedRoom);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error updating a document: ${error}`);
     }
 }
@@ -75,48 +74,45 @@ export const getDocuments = async (email: string) => {
 
         return { data: filteredRooms };
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error happened while getting rooms: ${error}`);
         return { data: [] };
     }
 }
 
 export const updateDocumentAccess = async ({ roomId, email, userType, updatedBy }: ShareDocumentParams) => {
-    if (!email) {
-        console.error("Email is null or empty");
-        throw new Error("Invalid email address");
-    }
-    if (!roomId) {
-        console.error("Room ID is missing");
-        throw new Error("Invalid room ID");
-    }
-    if (!userType) {
-        console.error("User type is missing");
-        throw new Error("Invalid user type");
-    }
-
-    console.log("Input parameters:", { roomId, email, userType, updatedBy });
-
+    
     try {
         const usersAccesses: RoomAccesses = {
             [email]: getAccessType(userType) as AccessType,
-            
         };
-
-        console.log("Users accesses:", usersAccesses);
-        console.log("Access type for userType:", { userType });
 
         const room = await liveblocks.updateRoom(roomId, { usersAccesses });
 
         if (room) {
-            console.log("Room updated successfully:", room);
+            const notificationId = nanoid();
+
+            await liveblocks.triggerInboxNotification({
+                userId: email,
+                kind: "$documentAccess",
+                subjectId: notificationId,
+                activityData: {
+                    userType,
+                    title: `You have been granted ${userType} access to the document by ${updatedBy.name}`,
+                    updatedBy: updatedBy.name,
+                    avatar: updatedBy.avatar,
+                    email: updatedBy.email,
+                },
+                roomId,
+            })
         }
 
         revalidatePath(`/documents/${roomId}`);
         return parseStringify(room);
-    } catch (error) {
+    } 
+    catch (error: unknown) {
         console.error(`Error updating document access: ${error}`);
-        throw error; // Lanza el error para que pueda manejarse externamente
+        throw error;
     }
 };
 
@@ -137,7 +133,7 @@ export const removeCollaborator = async ({roomId, email}: {roomId: string, email
         revalidatePath(`/documents/${roomId}`);
         return parseStringify(updatedRoom);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error removing collaborator: ${error}`);
     }
 }
@@ -148,7 +144,21 @@ export const deleteDocument = async (roomId: string) => {
         revalidatePath("/");
         redirect("/");
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error deleting document: ${error}`);
+    }
+}
+
+export const checkEmailExist = async (email: string) => {
+    try {
+        const response = await fetch(`/api/check-email?email=${encodeURIComponent(email)}`)
+        if(!response.ok) throw new Error("Error checking email");
+
+        const data = await response.json();
+        return data.exists;
+    } 
+    catch (error: unknown) {
+        console.error(`Error checking email: ${error}`);
+        return false;
     }
 }

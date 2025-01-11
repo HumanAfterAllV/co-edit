@@ -5,7 +5,7 @@ import { useSelf } from "@liveblocks/react/suspense";
 import Image from "next/image";
 import { z } from "zod";
 
-import { updateDocumentAccess } from "@/lib/actions/room.actions";
+import { checkEmailExist, updateDocumentAccess } from "@/lib/actions/room.actions";
 
 import {
     Dialog,
@@ -33,9 +33,12 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
     const [userType, setUserType] = useState<UserType>("viewer");
 
     const [errorEmail, setErrorEmail] = useState<string>("");
+    const [emailNoRegistered, setEmailNoRegistered] = useState<string>("");
     const emailSchema = z.string().email("Please, enter a valid email address...").refine((email) => email.endsWith("@gmail.com"), { message: "Only Gmail accounts are allowed" });
     
     const shareDocumentHandler = async() => {
+        setErrorEmail("");
+/*         setEmailNoRegistered(""); */
         try{
             emailSchema.parse(email);
         }
@@ -51,6 +54,14 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
             console.error("Email is null or empty");
             return;
         }
+/* 
+        const emailExist = await checkEmailExist(email);
+
+        if(!emailExist){
+            setEmailNoRegistered("This email is not registered in the platform");
+            return;
+        } */
+
         setLoading(true);
         await updateDocumentAccess({ roomId, email, userType: userType as UserType, updatedBy: user.info });
         setLoading(false);
@@ -99,6 +110,9 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
                 {errorEmail && (
                     <p className="text-red-500 mt-2">{errorEmail}</p>
                 )}
+{/*                 {emailNoRegistered && (
+                    <p className="text-red-500 mt-2">{emailNoRegistered}</p>
+                )} */}
                 <div className="my-2 space-y-2">
                     <ul className="flex flex-col">
                         {collaborators.map((collaborator) => (
