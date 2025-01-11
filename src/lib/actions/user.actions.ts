@@ -1,24 +1,28 @@
 "use server";
 
-import { clerkClient } from '@clerk/clerk-sdk-node'
+import { clerkClient } from '@clerk/nextjs/server';
 import { parseStringify } from "../utils";
 import { liveblocks } from '../liveblocks';
 
 
-export const getClerkUser = async ( {userIds} : {userIds : string[]}) => {
+export const getClerkUser = async ( {userEmails} : {userEmails : string[]}) => {
     try{
-        const {data} = await clerkClient.users.getUserList({
-            emailAddress: userIds
-        });
+        
+        const client = await clerkClient();
 
-        const users = data.map((user: any) => ({
+        const users = await client.users.getUserList({
+            emailAddress: userEmails
+        })
+        
+        const formattedUsers = users.data.map((user: any) => ({
             id: user.id,
-            name: `${user.firstName} ${user.lastName}`,
-            email: user.emailAddresses[0].emailAddress,
+            name: `${user.firstName} ${user.lastName}`.trim(),
+            email: user.emailAddresses[0].emailAddress ?? "",
             avatar: user.imageUrl,
-        })) 
+        }));
 
-        const sortedUsers = userIds.map((email)  => users.find((user: any) => user.email === email));
+        const sortedUsers = userEmails.map((email)  => formattedUsers.find((user: any) => user.email === email));
+        console.log({ users: formattedUsers, userEmails, sortedUsers });
 
         return parseStringify(sortedUsers);
     }
@@ -27,9 +31,10 @@ export const getClerkUser = async ( {userIds} : {userIds : string[]}) => {
     }
 }
 
-export const getDocumentsUser = async ({roomId, currentUser, text} : {roomId : string, currentUser : string | undefined, text: string}) => {
+export const getDocumentsUser = async ({roomId, currentUser, text} : {roomId : string, currentUser : string, text: string}) => {
     try{
         const room = await liveblocks.getRoom(roomId);
+
         const users = Object.keys(room.usersAccesses).filter((email) => email !== currentUser);
 
         if(text.length){
@@ -39,8 +44,11 @@ export const getDocumentsUser = async ({roomId, currentUser, text} : {roomId : s
 
             return parseStringify(filteredUsers);
         }
+
+        return parseStringify(users);
     }
     catch(error){
         console.error(`Error getting documents user: ${error}`);
     }
 }
+

@@ -8,7 +8,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin } from "@liveblocks/react-lexical"
+import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, useEditorStatus } from "@liveblocks/react-lexical"
 import { useSyncStatus } from "@liveblocks/react";
 import { useThreads } from '@liveblocks/react/suspense';
 
@@ -17,6 +17,7 @@ import ToolbarPlugin from './plugins/ToolbarPlugin';
 import FloatingToolbar from './plugins/FloatingToolBar';
 import Loader from '../Loader';
 import Comments from '../Comments';
+import DeleteModal from '../DeleteModal';
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
 // try to recover gracefully without losing user data.
@@ -25,11 +26,10 @@ function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
-type StatusType = "not-loaded" | "loading" | "synchronizing" | "synchronized";
 
 export function Editor({roomId, currentUserType} : {roomId: string, currentUserType: UserType}){
 
-  const status = useSyncStatus() as StatusType;
+  const status = useEditorStatus();
 
   const { threads } = useThreads();
   
@@ -41,6 +41,7 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
       throw error;
     },
     theme: Theme,
+    editable: currentUserType === "editor",
   });
   
   return (
@@ -48,7 +49,7 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
       <div className="editor-container size-full">
         <div className='toolbar-wrapper flex min-w-full justify-between'>
           <ToolbarPlugin />
-          {/* {currentUserType === "editor" && <DeleteModal roomId={roomId}/>} */}
+          {currentUserType === "editor" && <DeleteModal roomId={roomId}/>}
         </div>
         <div className='editor-wrapper flex flex-col items-center justify-start'>
           {status === "not-loaded" || status === "loading" ? <Loader/> : (

@@ -18,14 +18,22 @@ export default async function Document({params : { id }}: SearchParamProps): Pro
 
     if(!room) redirect("/");
 
-    const userIds = Object.keys(room.usersAccesses)
-    const users = await getClerkUser({userIds});
-
+    
+    const userEmails = Object.keys(room.usersAccesses)
+    const users = await getClerkUser({userEmails});
+    
     const userData = users.map((user: User) => ({
         ...user,
         userType: room.usersAccesses[user.email]?.includes("room:write") ? "editor" : "viewer",
+    }));
+    
 
-    }))
+    const emailAddress = clerkUser.emailAddresses[0]?.emailAddress;
+
+    if (!emailAddress || !room.usersAccesses[emailAddress]) {
+        console.error("User email or access not found:", emailAddress);
+        redirect("/");
+    }
 
     const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
@@ -35,3 +43,4 @@ export default async function Document({params : { id }}: SearchParamProps): Pro
         </main>
     )
 }
+

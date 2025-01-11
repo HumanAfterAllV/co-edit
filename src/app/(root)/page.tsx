@@ -9,6 +9,7 @@ import { dateConverter } from "@/lib/utils";
 
 import Header from "@/components/Header";
 import AddDocumentBtn from "@/components/AddDocumentBtn";
+import DeleteModal from "@/components/DeleteModal";
 
 export default async function Home(): Promise<React.JSX.Element> {
     const clerkUser = await currentUser();
@@ -52,7 +53,7 @@ export default async function Home(): Promise<React.JSX.Element> {
                                         <p className="text-sm font-light text-gray-400">Created about {dateConverter(createdAt)}</p>
                                     </div>
                                 </Link>
-                                {/* TODO: Delete btn */}
+                                <DeleteModal roomId={id} />
                             </li>
                         ))}
                     </ul>

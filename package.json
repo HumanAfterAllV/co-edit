@@ -9,9 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/clerk-sdk-node": "^5.1.4",
     "@clerk/express": "^1.3.31",
-    "@clerk/nextjs": "^6.9.6",
+    "@clerk/nextjs": "^6.9.9",
     "@clerk/themes": "^2.2.3",
     "@lexical/react": "^0.16.1",
     "@liveblocks/client": "^2.15.1",
@@ -34,7 +33,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

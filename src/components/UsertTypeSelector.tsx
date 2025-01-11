@@ -10,6 +10,7 @@ import {
 export default function UserTypeSelector({userType, setUserType, onClickHandler} : UserTypeSelectorParams): React.JSX.Element {
 
     const accessChangeHandler = (type: UserType) => {
+        console.log("User type:", type);
         setUserType(type);
 
         if(onClickHandler) {

@@ -17,12 +17,13 @@ export default function Provider({children}: {children: ReactNode}): React.JSX.E
         <LiveblocksProvider 
             authEndpoint="/api/liveblocks-auth" 
             resolveUsers={async ({ userIds }) => {
-                const users = await getClerkUser({userIds})
+                const userEmails = userIds
+                const users = await getClerkUser({userEmails})
 
                 return users;
             }}
             resolveMentionSuggestions={async ({text, roomId}) => {
-                const roomUsers = await getDocumentsUser({roomId, currentUser: clerkUser?.emailAddresses[0].emailAddress , text});
+                const roomUsers = await getDocumentsUser({roomId, currentUser: clerkUser?.emailAddresses[0].emailAddress ?? "", text});
 
                 return roomUsers;
             }}
