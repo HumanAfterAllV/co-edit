@@ -77,7 +77,7 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
             <ClientSideSuspense fallback={<Loader />}>
                 <div className="collaborative-room">
                     <Header>
-                        <div ref={containerRef} className="flex w-fit items-center justify-center gap-2">
+                        <div ref={containerRef} className="flex w-fit items-center justify-center gap-2 bg-beige-500 p-2 ">
                             {editing && !loading ? (
                                 <Input
                                     type="text"
@@ -87,11 +87,11 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
                                     onChange={(e) => setDocumentTitle(e.target.value)}
                                     onKeyDown={updateTitleHandler}
                                     disabled={!editing}
-                                    className="document-title-input"
+                                    className="document-title-input placeholder:text-dark-350"
                                 />
                             ):(
                                 <>
-                                    <p className="document-title">{documentTitle}</p>
+                                    <p className="document-title text-dark-500">{documentTitle}</p>
                                 </>
                             )}
                             {currentUserType === "editor" && !editing && (
@@ -111,7 +111,7 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
                                 <p className="text-sm text-gray-400">Saving...</p>
                             )}
                         </div>
-                        <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+                        <div className="flex w-full flex-1 justify-end items-center gap-2 sm:gap-3">
                             <ActiveCollaborators/>
                             <ShareModal 
                                 roomId={roomId} 

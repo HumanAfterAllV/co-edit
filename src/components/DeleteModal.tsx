@@ -38,7 +38,7 @@ export default function DeleteModal({roomId}: {roomId: string}): React.JSX.Eleme
 
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="min-w-9 rounded-xl bg-transparent p-2 transition-all">
+                <Button className="min-w-9 shadow-none bg-transparent p-2 transition-all">
                     <Image
                         src="/assets/icons/delete.svg"
                         alt="Delete"
@@ -70,7 +70,7 @@ export default function DeleteModal({roomId}: {roomId: string}): React.JSX.Eleme
                     <Button
                         variant="destructive"
                         onClick={deleteDocumentHandler}
-                        className="gradient-red w-full"
+                        className="bg-red-500 text-dark-500 w-full"
                     >
                         {loading ? "Deleting...": "Delete"}
 

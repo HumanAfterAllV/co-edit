@@ -1,23 +1,42 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import Provider from "./Provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const generalSansFont = localFont({
+  src: [
+    {
+      path: "./fonts/GeneralSans/GeneralSans-Light.otf",
+      weight: "300",
+    },
+    {
+      path: "./fonts/GeneralSans/GeneralSans-Regular.otf",
+      weight: "400",
+    },
+    {
+      path: "./fonts/GeneralSans/GeneralSans-Medium.otf",
+      weight: "500",
+    },
+    {
+      path:"./fonts/GeneralSans/GeneralSans-Semibold.otf",
+      weight: "600",
+    },
+    {
+      path: "./fonts/GeneralSans/GeneralSans-Bold.otf",
+      weight: "700",
+    }
+  ],
+  variable: "--font-general-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "CoEdit",
   description: "Your go-to collaborative platform for type design",
+  icons: {
+    icon: "/assets/icons/logo-co_edit.svg",
+  }
 };
 
 export default function RootLayout({
@@ -28,15 +47,13 @@ export default function RootLayout({
   return (
     <ClerkProvider 
     appearance={{
-      baseTheme: dark, 
       variables:{
-        colorPrimary: "#3371FF",
         fontSize: "16px",
       } 
       }}>
       <html lang="en">
         <body
-          className={`min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`min-h-screen ${generalSansFont.variable}  antialiased`}
           suppressHydrationWarning={true}
         >
           <Provider>

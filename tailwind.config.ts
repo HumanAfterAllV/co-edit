@@ -22,26 +22,42 @@ const config = {
     },
     extend: {
       colors: {
-        blue: {
-          100: '#B4C6EE',
-          400: '#417BFF',
-          500: '#3371FF',
+        beige:{
+          300: '#FFF9E5',
+          500: '#F6ECCA',
+          600: '#E4DBBA',
+          700: "#DCC58C",
         },
-        red: {
-          400: '#DD4F56',
-          500: '#DC4349',
+        blue: {
+          500: '#99B7DD',
+          600: '#86A3C6 ',
+        },
+        orange:{
+          500: '#EA7A54',
+          600: '#D06749'
+        },
+        yellow: {
+          500: '#F8D44C',
+          600: '#E6BF44',
+        },
+        mint: {
+          500: '#8ACBB7',
+          600: '#78B29F '
         },
         dark: {
-          100: '#09111F',
-          200: '#0B1527',
+          100: '#010101',
+          200: '#1A1A1A',
           300: '#0F1C34',
-          350: '#12213B',
-          400: '#27344D',
-          500: '#2E3D5B',
+          350: '#555555',
+          400: '#525252',
+          500: '#2E2E2E',
         },
+        neutro: {
+          500: "#8A8A8A"
+        }
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: ['var(--font-general-sans)', ...fontFamily.sans],
       },
       keyframes: {
         'accordion-down': {

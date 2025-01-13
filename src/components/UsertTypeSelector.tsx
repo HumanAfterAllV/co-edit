@@ -22,7 +22,7 @@ export default function UserTypeSelector({userType, setUserType, onClickHandler}
             <SelectTrigger className="shad-select">
                 <SelectValue/>
             </SelectTrigger>
-            <SelectContent className="border-none bg-dark-200">
+            <SelectContent className="border-none bg-dark-500">
                 <SelectItem value="viewer" className="shad-select-item">Viewer</SelectItem>
                 <SelectItem value="editor" className="shad-select-item">Editor</SelectItem>
             </SelectContent>

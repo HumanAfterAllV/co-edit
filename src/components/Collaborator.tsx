@@ -36,13 +36,13 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                     className="size-9 rounded-full"
                 />
                 <div>
-                    <p className="line-clamp-1 text-sm font-bold leading-4 text-white">
+                    <p className="line-clamp-1 text-sm font-bold leading-4 text-dark-500">
                         {collaborator.name}
-                        <span className="text-10-regular pl-2 text-blue-100">
+                        <span className="text-10-regular pl-2 text-neutro-500">
                             {loading && "loading..."}
                         </span>
                     </p>
-                    <p className="text-sm font-light text-blue-100">{collaborator.email}</p>
+                    <p className="text-sm font-light text-neutro-500">{collaborator.email}</p>
                 </div>
             </div>
             {creatorId === collaborator.id ? (
@@ -54,7 +54,7 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                         setUserType={setUserType || "viewer"}
                         onClickHandler={shareDocumentHandler}
                     />
-                    <Button type="button" onClick={() => removerCollaboratorHandler(collaborator.email)} className="text-red-500">
+                    <Button type="button" onClick={() => removerCollaboratorHandler(collaborator.email)} className="text-red-500 shadow-none">
                         Remove
                     </Button>
                 </div>

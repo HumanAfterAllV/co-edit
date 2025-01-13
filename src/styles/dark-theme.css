@@ -57,7 +57,7 @@ body {
 }
 
 .editor-inner {
-  background: #0b1527;
+  background: #FFF9E5;
   position: relative;
 }
 
@@ -71,11 +71,11 @@ body {
   outline: 0;
   padding: 40px;
   caret-color: #444;
-  color: #b4c6ee;
+  color: #2E2E2E;
 }
 
 .editor-placeholder {
-  color: #b4c6ee;
+  color: #2E2E2E;
   overflow: hidden;
   position: absolute;
   text-overflow: ellipsis;
@@ -319,7 +319,7 @@ pre::-webkit-scrollbar-thumb {
 .toolbar {
   display: flex;
   margin-bottom: 1px;
-  background: #09111f;
+  background: transparent;
   padding: 4px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -360,7 +360,7 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .toolbar button.toolbar-item.active {
-  background-color: #0f1c34;
+  background-color: #E4DBBA;
 }
 
 .toolbar button.toolbar-item.active i {
@@ -368,12 +368,12 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .toolbar .toolbar-item:hover:not([disabled]) {
-  background-color: #0f1c34;
+  background-color: #E4DBBA;
 }
 
 .toolbar .divider {
   width: 1px;
-  background-color: #0f1c34;
+  background-color: #E4DBBA;
   margin: 0 4px;
 }
 
@@ -383,7 +383,7 @@ pre::-webkit-scrollbar-thumb {
   width: 200px;
   vertical-align: middle;
   font-size: 14px;
-  color: #777;
+  color: #2E2E2E;
   text-overflow: ellipsis;
   width: 70px;
   overflow: hidden;
@@ -399,11 +399,10 @@ pre::-webkit-scrollbar-thumb {
   margin-right: 8px;
   line-height: 16px;
   background-size: contain;
+  fill: #2E2E2E;
 }
 
-.toolbar-item .format {
-  filter: invert(1);
-}
+
 
 i.undo {
   background-image: url(/assets/icons/arrow-counterclockwise.svg);

@@ -34,7 +34,7 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
 
     const [errorEmail, setErrorEmail] = useState<string>("");
     const [emailNoRegistered, setEmailNoRegistered] = useState<string>("");
-    const emailSchema = z.string().email("Please, enter a valid email address...").refine((email) => email.endsWith("@gmail.com"), { message: "Only Gmail accounts are allowed" });
+    const emailSchema = z.string().email("Please, enter a valid email address...").refine((email) => email.endsWith("@gmail.com"), { message: "Only Gmail and register accounts are allowed" });
     
     const shareDocumentHandler = async() => {
         setErrorEmail("");
@@ -69,26 +69,28 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
 
     return(
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="gradient-blue flex h-9 gap-1 px-4 items-center rounded-md" disabled={currentUserType !== "editor"}>
-                <Image
-                    src="/assets/icons/share.svg"
-                    alt="Share"
-                    width={20}
-                    height={20}
-                    className="min-w-4 md:size-5"
-                />
-                <p className="mr-1 hidden md:block">
-                    Share
-                </p>
+            <DialogTrigger asChild>
+                <Button variant="outline" className="flex flex-row items-center rounded-3xl border-[1px] border-dark-500 shadow-none bg-beige-500" disabled={currentUserType !== "editor"}>
+                    <Image
+                        src="/assets/icons/share.svg"
+                        alt="Share"
+                        width={20}
+                        height={20}
+                        className="min-w-4 md:size-5"
+                    />
+                    <p className="mr-1 hidden md:block font-bold text-dark-500">
+                        Share
+                    </p>
+                </Button>
             </DialogTrigger>
             <DialogContent className="shad-dialog">
                 <DialogHeader>
                     <DialogTitle>Manage who can view this project</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-neutro-500">
                         Select which users can view and edit this document
                     </DialogDescription>
                 </DialogHeader>
-                <Label htmlFor="email" className="mt-6 text-blue-100">Email Address</Label>
+                <Label htmlFor="email" className="mt-6 text-dark-500">Email Address</Label>
                 <div className="flex items-center gap-3">
                     <div className="flex flex-1 rounded-md bg-dark-1000">
                         <Input 
@@ -103,7 +105,7 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
                         />
                         <UserTypeSelector userType={userType as UserType} setUserType={setUserType}/>
                     </div>
-                    <Button type="submit" onClick={shareDocumentHandler} className="gradient-blue flex h-9 gap-1 px-5" disabled={loading}>
+                    <Button type="submit" onClick={shareDocumentHandler} className="flex flex-row items-center rounded-3xl border-[1px] border-dark-500 shadow-none" disabled={loading}>
                         {loading ? "Sending..." : "Invite"}
                     </Button>
                 </div>

@@ -44,7 +44,7 @@ export default function Notifications(): React.JSX.Element {
                 >
                     <InboxNotificationList>
                         {unreadNotifications.length <= 0 && (
-                            <p className="py-2 text-center text-gray-500">
+                            <p className="py-2 text-center text-white">
                                 No new notifications
                             </p>
                         )}
