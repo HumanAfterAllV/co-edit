@@ -7,7 +7,7 @@ export default function Header({children, className}: HeaderProps): React.JSX.El
         <div className={cn("header", className)}>
             <Link href="/" className="md:flex-1">
                 <Image
-                    src="/assets/icons/logo.svg"
+                    src="/assets/icons/logo-co_edit.svg"
                     alt="Logo"
                     width={120}
                     height={32}
