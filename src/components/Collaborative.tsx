@@ -14,7 +14,7 @@ import { updateDocument } from "@/lib/actions/room.actions";
 
 import { Input } from "./ui/input";
 
-import { Editor } from "@/components/editor/Editor";
+import { Editor } from "@/components/editor/NewEditor";
 import Header from "@/components/Header";
 import ActiveCollaborators from "./ActiveCollaborators";
 import Loader from "./Loader";
@@ -76,6 +76,16 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
         <RoomProvider id={roomId}>
             <ClientSideSuspense fallback={<Loader />}>
                 <div className="collaborative-room">
+                    <Editor roomId={roomId} currentUserType={currentUserType} roomMetadata={roomMetadata} users={users}/>
+                </div>
+            </ClientSideSuspense>
+        </RoomProvider>
+    )
+}
+
+
+
+
 {/*                     <Header>
                         <div ref={containerRef} className="flex w-fit items-center justify-center gap-2 bg-beige-500 p-2 ">
                             {editing && !loading ? (
@@ -127,9 +137,3 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
                             </SignedIn>
                         </div>
                     </Header> */}
-                    <Editor roomId={roomId} currentUserType={currentUserType}/>
-                </div>
-            </ClientSideSuspense>
-        </RoomProvider>
-    )
-}

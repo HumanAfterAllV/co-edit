@@ -38,7 +38,7 @@ export default async function Document({params : { id }}: SearchParamProps): Pro
     const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
     return( 
-        <main className="flex w-full flex-col items-center">
+        <main className="min-h-screen bg-toxic-500 p-4 md:p-8">
             <Collaborative roomId={id} roomMetadata={room.metadata} users={userData} currentUserType={currentUserType}/>            
         </main>
     )

@@ -5,6 +5,7 @@ import { useState } from "react";
 import UserTypeSelector from "./UsertTypeSelector";
 import { Button } from "./ui/button";
 import { removeCollaborator, updateDocumentAccess } from "@/lib/actions/room.actions";
+import { Trash, Trash2 } from "lucide-react";
 
 export default function Collaborator({roomId, creatorId, collaborator, user, email}: CollaboratorProps): React.JSX.Element {
 
@@ -46,7 +47,7 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                 </div>
             </div>
             {creatorId === collaborator.id ? (
-                <p className="text-sm text-blue">Owner</p>
+                <p className="text-sm text-black">Owner</p>
             ):(
                 <div className="flex items-center ">
                     <UserTypeSelector 
@@ -55,7 +56,7 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                         onClickHandler={shareDocumentHandler}
                     />
                     <Button type="button" onClick={() => removerCollaboratorHandler(collaborator.email)} className="text-red-500 shadow-none">
-                        Remove
+                        <Trash2 className="h-10 w-10"/>
                     </Button>
                 </div>
             )}

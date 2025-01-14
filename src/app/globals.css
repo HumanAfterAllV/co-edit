@@ -66,7 +66,7 @@ body{
   }
 
   .shad-select {
-    @apply w-fit border-none bg-transparent text-dark-500 shadow-none !important;
+    @apply w-[100px] text-black border-4 border-black bg-yellow-500 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] !important;
   }
 
   .shad-select svg {
@@ -118,7 +118,7 @@ body{
   }
 
   .document-title-input {
-    @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base text-dark-500 font-bold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center !important;
+    @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base text-white shadow-none font-bold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-left !important;
   }
 
   .document-title {
@@ -126,7 +126,7 @@ body{
   }
 
   .view-only-tag {
-    @apply rounded-md bg-dark-400/50 px-2 py-0.5 text-xs text-blue-100/50;
+    @apply rounded-md bg-dark-400/50 px-2 py-0.5 text-xs text-white;
   }
 
   .collaborators-list {
@@ -173,7 +173,7 @@ body{
 
   /* ======================== CollaborativeRoom */
   .collaborative-room {
-    @apply flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden;
+    @apply grid gap-4 lg:grid-cols-[1fr_300px];
   }
 }
 

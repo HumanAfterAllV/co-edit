@@ -5,6 +5,8 @@ import { useSelf } from "@liveblocks/react/suspense";
 import Image from "next/image";
 import { z } from "zod";
 
+import { Mail, Share2, Users2 } from "lucide-react"; 
+
 import { checkEmailExist, updateDocumentAccess } from "@/lib/actions/room.actions";
 
 import {
@@ -70,44 +72,40 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
     return(
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="flex flex-row items-center rounded-3xl border-[1px] border-dark-500 shadow-none bg-beige-500" disabled={currentUserType !== "editor"}>
-                    <Image
-                        src="/assets/icons/share.svg"
-                        alt="Share"
-                        width={20}
-                        height={20}
-                        className="min-w-4 md:size-5"
-                    />
-                    <p className="mr-1 hidden md:block font-bold text-dark-500">
+                <Button variant="outline" className="border-custom-btn" disabled={currentUserType !== "editor"}>
+                    <Share2 className="mr-2 h-4 w-4"/>
+                    <p className="mr-1 hidden md:block font-bold">
                         Share
                     </p>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="shad-dialog">
-                <DialogHeader>
-                    <DialogTitle>Manage who can view this project</DialogTitle>
-                    <DialogDescription className="text-neutro-500">
-                        Select which users can view and edit this document
-                    </DialogDescription>
+            <DialogContent className="border-custom-cards">
+                <DialogHeader className="border-b-4 border-black p-6">
+                    <DialogTitle className="flex items-center gap-2 text-2xl text-white">
+                        <Users2 className="h-8 w-8"/>
+                        Share Document
+                    </DialogTitle>
                 </DialogHeader>
-                <Label htmlFor="email" className="mt-6 text-dark-500">Email Address</Label>
-                <div className="flex items-center gap-3">
-                    <div className="flex flex-1 rounded-md bg-dark-1000">
-                        <Input 
-                            id="email" 
-                            type="email"
-                            placeholder="Enter email address" 
-                            value={email} 
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                            }} 
-                            className="share-input"
-                        />
+                <div className="space-y-6 p-6">
+                    <div className="flex gap-2">
+                        <div className="relative flex-1">
+                            <Mail className="absolute top-3 left-3 h-4 w-4 text-gray-400"/>
+                            <Input 
+                                id="email" 
+                                type="email"
+                                placeholder="Enter email address" 
+                                value={email} 
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }} 
+                                className="text-black border-4 border-black pl-10 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                            />
+                        </div>
                         <UserTypeSelector userType={userType as UserType} setUserType={setUserType}/>
+                        <Button type="submit" onClick={shareDocumentHandler} className="border-custom-btn" disabled={loading}>
+                            {loading ? "Sending..." : "Invite"}
+                        </Button>
                     </div>
-                    <Button type="submit" onClick={shareDocumentHandler} className="flex flex-row items-center rounded-3xl border-[1px] border-dark-500 shadow-none" disabled={loading}>
-                        {loading ? "Sending..." : "Invite"}
-                    </Button>
                 </div>
                 {errorEmail && (
                     <p className="text-red-500 mt-2">{errorEmail}</p>
@@ -115,19 +113,22 @@ export default function ShareModal({roomId, collaborators, creatorId, currentUse
 {/*                 {emailNoRegistered && (
                     <p className="text-red-500 mt-2">{emailNoRegistered}</p>
                 )} */}
-                <div className="my-2 space-y-2">
-                    <ul className="flex flex-col">
-                        {collaborators.map((collaborator) => (
-                            <Collaborator
-                                key={collaborator.id} 
-                                roomId={roomId} 
-                                creatorId={creatorId}
-                                email={collaborator.email}
-                                collaborator={collaborator}
-                                user={user.info}
-                            />
-                        ))}
-                    </ul>
+                <div className="space-y-4">
+                    <h3 className="text-lg font-bold text-white">People with access</h3>
+                    <div className="rounded-lg border-4 border-black bg-white p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <ul className="flex flex-col">
+                            {collaborators.map((collaborator) => (
+                                <Collaborator
+                                    key={collaborator.id} 
+                                    roomId={roomId} 
+                                    creatorId={creatorId}
+                                    email={collaborator.email}
+                                    collaborator={collaborator}
+                                    user={user.info}
+                                />
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>

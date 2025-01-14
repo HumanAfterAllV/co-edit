@@ -18,6 +18,7 @@ import FloatingToolbar from './plugins/FloatingToolBar';
 import Loader from '../Loader';
 import Comments from '../Comments';
 import DeleteModal from '../DeleteModal';
+import { Card } from '../ui/card';
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
 // try to recover gracefully without losing user data.
@@ -46,8 +47,11 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
   
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="editor-container size-full">
-        <div className='toolbar-wrapper flex min-w-full justify-between'>
+      <div className="space-y-4">
+        <Card className="border-custom-cards">
+          
+        </Card>
+{/*         <div className='toolbar-wrapper flex min-w-full justify-between'>
           <ToolbarPlugin />
           {currentUserType === "editor" && <DeleteModal roomId={roomId}/>}
         </div>
@@ -72,7 +76,7 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
             <FloatingThreads threads={threads}/>
             <Comments/>
           </LiveblocksPlugin>
-        </div>
+        </div> */}
       </div>
     </LexicalComposer>
   );
