@@ -162,3 +162,27 @@ export const checkEmailExist = async (email: string) => {
         return false;
     }
 }
+
+export const getRoomStats = async (userId: string) => {
+    try{
+        const response = await fetch(`/api/user-stats?userId=${encodeURIComponent(userId)}`)
+        if (!response.ok) throw new Error("Error fetching room stats");
+
+        const data = await response.json();
+
+        const avatars = data.collaborators.map((collaborator: any) => collaborator.avatar);
+        const totalComments = data.comments.length;
+        const totalWords = data.comments.reduce((acc: number, comment: string) => acc + comment.split(" ").length, 0);
+
+        return {
+            avatars,
+            totalComments,
+            totalWords,
+        };
+    }
+    catch(error: unknown){
+        console.error(`Error getting room stats: ${error}`);
+    }
+}
+
+//TODO: Add actions for search documents

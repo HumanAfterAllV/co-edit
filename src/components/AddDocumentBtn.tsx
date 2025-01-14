@@ -20,14 +20,14 @@ export default function AddDocumentBtn({userId, email}: AddDocumentBtnProps): Re
     };
     
     return(
-        <Button type="submit" onClick={addDocumentHandler} className="shad-btn bg-beige-500">
+        <Button type="submit" onClick={addDocumentHandler} className="border-custom-btn">
             <Image
                 src="/assets/icons/add.svg"
                 alt="Add Document"
                 width={24}
                 height={24}
             />
-            <p className="hidden sm:block font-bold text-dark-500">Start a blank document</p>
+            <p className="hidden sm:block font-bold">New document</p>
         </Button>
     )
 }

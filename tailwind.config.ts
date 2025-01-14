@@ -36,10 +36,6 @@ const config = {
           500: '#EA7A54',
           600: '#D06749'
         },
-        yellow: {
-          500: '#F8D44C',
-          600: '#E6BF44',
-        },
         mint: {
           500: '#8ACBB7',
           600: '#78B29F '
@@ -54,6 +50,16 @@ const config = {
         },
         neutro: {
           500: "#8A8A8A"
+        },
+        toxic: {
+          500: "#50ffb0"
+        },
+        yellow: {
+          100: "#e9ef1a",
+          500: "#F8FE1F"
+        },
+        purple: {
+          500: "#9C7BFE"
         }
       },
       fontFamily: {

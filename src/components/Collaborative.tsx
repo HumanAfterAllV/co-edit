@@ -76,7 +76,7 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
         <RoomProvider id={roomId}>
             <ClientSideSuspense fallback={<Loader />}>
                 <div className="collaborative-room">
-                    <Header>
+{/*                     <Header>
                         <div ref={containerRef} className="flex w-fit items-center justify-center gap-2 bg-beige-500 p-2 ">
                             {editing && !loading ? (
                                 <Input
@@ -126,7 +126,7 @@ export default function Collaborative({roomId, roomMetadata, users, currentUserT
                                 <UserButton />
                             </SignedIn>
                         </div>
-                    </Header>
+                    </Header> */}
                     <Editor roomId={roomId} currentUserType={currentUserType}/>
                 </div>
             </ClientSideSuspense>

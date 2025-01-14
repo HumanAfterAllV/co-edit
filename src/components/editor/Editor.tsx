@@ -47,7 +47,7 @@ export function Editor({roomId, currentUserType} : {roomId: string, currentUserT
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-        <div className='toolbar-wrapper flex min-w-full justify-between bg-beige-500'>
+        <div className='toolbar-wrapper flex min-w-full justify-between'>
           <ToolbarPlugin />
           {currentUserType === "editor" && <DeleteModal roomId={roomId}/>}
         </div>
