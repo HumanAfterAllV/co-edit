@@ -162,3 +162,23 @@ export const checkEmailExist = async (email: string) => {
         return false;
     }
 }
+
+export const getUserRoomStats = async (email: string) => {
+    try {
+        const response = await fetch(`/api/user-room-stats?email=${encodeURIComponent(email)}`);
+        if (!response.ok) throw new Error("Error fetching user room stats");
+
+        const data = await response.json();
+
+        return {
+            totalRooms: data.totalRooms,
+            totalComments: data.totalComments,
+        };
+    } catch (error: unknown) {
+        console.error(`Error fetching user room stats: ${error}`);
+        return {
+            totalRooms: 0,
+            totalComments: 0,
+        };
+    }
+};

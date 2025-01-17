@@ -2,9 +2,13 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import UserTypeSelector from "./UsertTypeSelector";
-import { Button } from "./ui/button";
+
 import { removeCollaborator, updateDocumentAccess } from "@/lib/actions/room.actions";
+
+import { Button } from "./ui/button";
+import { Trash2 } from "lucide-react";
+
+import UserTypeSelector from "./UsertTypeSelector";
 
 export default function Collaborator({roomId, creatorId, collaborator, user, email}: CollaboratorProps): React.JSX.Element {
 
@@ -36,17 +40,17 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                     className="size-9 rounded-full"
                 />
                 <div>
-                    <p className="line-clamp-1 text-sm font-bold leading-4 text-white">
+                    <p className="line-clamp-1 text-sm font-bold leading-4 text-dark-500">
                         {collaborator.name}
-                        <span className="text-10-regular pl-2 text-blue-100">
+                        <span className="text-10-regular pl-2 text-neutro-500">
                             {loading && "loading..."}
                         </span>
                     </p>
-                    <p className="text-sm font-light text-blue-100">{collaborator.email}</p>
+                    <p className="text-sm font-light text-neutro-500">{collaborator.email}</p>
                 </div>
             </div>
             {creatorId === collaborator.id ? (
-                <p className="text-sm text-blue">Owner</p>
+                <p className="text-sm text-black">Owner</p>
             ):(
                 <div className="flex items-center ">
                     <UserTypeSelector 
@@ -54,8 +58,8 @@ export default function Collaborator({roomId, creatorId, collaborator, user, ema
                         setUserType={setUserType || "viewer"}
                         onClickHandler={shareDocumentHandler}
                     />
-                    <Button type="button" onClick={() => removerCollaboratorHandler(collaborator.email)} className="text-red-500">
-                        Remove
+                    <Button type="button" onClick={() => removerCollaboratorHandler(collaborator.email)} className="text-red-500 shadow-none">
+                        <Trash2 className="h-10 w-10"/>
                     </Button>
                 </div>
             )}

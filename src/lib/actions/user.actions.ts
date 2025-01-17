@@ -26,7 +26,7 @@ export const getClerkUser = async ( {userEmails} : {userEmails : string[]}) => {
 
         return parseStringify(sortedUsers);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error getting clerk user: ${error}`);
     }
 }
@@ -47,7 +47,7 @@ export const getDocumentsUser = async ({roomId, currentUser, text} : {roomId : s
 
         return parseStringify(users);
     }
-    catch(error){
+    catch(error: unknown){
         console.error(`Error getting documents user: ${error}`);
     }
 }

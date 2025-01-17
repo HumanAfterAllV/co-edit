@@ -62,6 +62,13 @@ declare type SearchParamProps = {
     collaborator: User;
     user: User;
   };
+
+  declare type EditorProps = {
+    roomId: string;
+    currentUserType: UserType;
+    roomMetadata: RoomMetadata;
+    users: User[];
+  }
   
   declare type CollaborativeRoomProps = {
     roomId: string;

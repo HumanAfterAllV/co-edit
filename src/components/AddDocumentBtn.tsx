@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { createDocument } from "@/lib/actions/room.actions";
 import { useRouter } from "next/navigation";
+
+import { createDocument } from "@/lib/actions/room.actions";
+
+import { Button } from "./ui/button";
 
 export default function AddDocumentBtn({userId, email}: AddDocumentBtnProps): React.JSX.Element {
     const router = useRouter();
@@ -20,14 +22,14 @@ export default function AddDocumentBtn({userId, email}: AddDocumentBtnProps): Re
     };
     
     return(
-        <Button type="submit" onClick={addDocumentHandler} className="gradient-blue flex-1 shadow-md">
+        <Button type="submit" onClick={addDocumentHandler} className="border-custom-btn">
             <Image
                 src="/assets/icons/add.svg"
                 alt="Add Document"
                 width={24}
                 height={24}
             />
-            <p className="hidden sm:block ">Start a blank document</p>
+            <p className="hidden sm:block font-bold">New document</p>
         </Button>
     )
 }
