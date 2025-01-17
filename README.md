@@ -1,5 +1,6 @@
 <div align="center">
-![logo-co_edit](https://github.com/user-attachments/assets/6cb4023a-b995-49c1-a2c9-ec8ac0754cd6)
+
+![logo-co_edit](https://github.com/user-attachments/assets/41af180e-d22c-4ef3-9227-e8d3a963beee)
 
   <p><strong>Real-time collaborative text editor with a neo-brutalist design</strong></p>
 </div>
