@@ -7,17 +7,25 @@ interface ViewOptions {
     view: "grid" | "list";
     setView: React.Dispatch<React.SetStateAction<"grid" | "list">>;
     numberRooms?: number;
+    searchTerm?: string;
+    setSearchTerm?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ToolbarSearch({view ,setView, numberRooms}: ViewOptions): React.JSX.Element {
+export default function ToolbarSearch({view ,setView, numberRooms, searchTerm, setSearchTerm}: ViewOptions): React.JSX.Element {
     return(
         <Card className="mb-6 border-custom-cards">   
             <CardContent className="p-4">
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="relative flex-1">
+                        <div className="relative flex-1 w-[400px]">
                             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400"/>
-                            <Input className="border-4 border-black pl-8 bg-white" placeholder="Search document..."/>
+                            <Input 
+                                type="text" 
+                                value={searchTerm} 
+                                onChange={(e) => setSearchTerm && setSearchTerm(e.target.value)}
+                                className="border-4 border-black pl-8 bg-white" 
+                                placeholder="Search document..."
+                            />
                         </div>
                         <Button variant="outline" className="border-custom-btn">
                             Search

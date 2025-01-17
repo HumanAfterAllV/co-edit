@@ -1,6 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
+
+import { deleteDocument } from "@/lib/actions/room.actions";
+
 import {
     Dialog,
     DialogClose,
@@ -12,8 +15,8 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "./ui/button";
-import { useState } from "react";
-import { deleteDocument } from "@/lib/actions/room.actions";
+import { AlertTriangle, Trash2 } from "lucide-react";
+
 
 export default function DeleteModal({roomId}: {roomId: string}): React.JSX.Element {
 
@@ -38,42 +41,35 @@ export default function DeleteModal({roomId}: {roomId: string}): React.JSX.Eleme
 
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="min-w-9 shadow-none bg-transparent p-2 transition-all">
-                    <Image
-                        src="/assets/icons/delete.svg"
-                        alt="Delete"
-                        width={20}
-                        height={20}
-                        className="mt-1"
-                    />
+                <Button className="border-4 border-black bg-white hover:bg-red-100 text-red-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <Trash2 className="h-4 w-4"/>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="shad-dialog">
+            <DialogContent className="border-custom-cards space-y-3">
                 <DialogHeader>
-                    <Image
-                        src="/assets/icons/delete-modal.svg"
-                        alt="Delete"
-                        width={48}
-                        height={48}
-                        className="mb-8" 
-                    />
-                    <DialogTitle>Delete Document</DialogTitle>
-                    <DialogDescription>
-                        Are you sure you want to delete this document? This action cannot be
-                        undone.
-                    </DialogDescription>
+                    <DialogTitle className="text-2xl text-white">Delete Document</DialogTitle>
                 </DialogHeader>
-                <DialogFooter className="mt-5">
-                    <DialogClose asChild className="w-full bg-dark-400 text-white">
-                        Cancel
+                <div className="space-y-4p-6">
+                    <div className="flex items-center gap-4">
+                        <div className="rounded-full border-4 border-black bg-yellow-500 p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)">
+                           <AlertTriangle className="h-6 w-6 text-black"/> 
+                        </div>
+                        <DialogDescription className="text-base text-white">
+                            ¿Are you sure you want to delete this document? This action cannot be undone.
+                        </DialogDescription>
+                    </div>
+                </div>
+                <DialogFooter className="flex flex-row items-center w-full justify-center border-t-4 border-black p-6">
+                    <DialogClose asChild>
+                        <Button className="border-custom-btn">
+                            Cancel
+                        </Button>
                     </DialogClose>
                     <Button
-                        variant="destructive"
                         onClick={deleteDocumentHandler}
-                        className="bg-red-500 text-dark-500 w-full"
+                        className="border-4 border-black bg-white hover:bg-gray-100 text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     >
                         {loading ? "Deleting...": "Delete"}
-
                     </Button>
                 </DialogFooter>
             </DialogContent>

@@ -29,12 +29,12 @@ export default function Notifications(): React.JSX.Element {
 
                 />
                 {count > 0 && (
-                    <div className="absolute top-2 right-2 z-20 size-2 rounded-full bg-blue-500">
+                    <div className="absolute top-2 right-2 z-20 size-2 rounded-full bg-toxic-500">
                         
                     </div>
                 )}
             </PopoverTrigger>
-            <PopoverContent align="end" className="shad-popover">
+            <PopoverContent align="end" className="border-custom-cards w-[460px]">
                 <LiveblocksUIConfig
                     overrides={{
                         INBOX_NOTIFICATION_TEXT_MENTION : (user: ReactNode) => (
@@ -52,7 +52,7 @@ export default function Notifications(): React.JSX.Element {
                             <InboxNotification 
                                 key={notification.id} 
                                 inboxNotification={notification}
-                                className="bg-dark-200 text-white"
+                                className=" bg-purple-500 text-white"
                                 href={`/documents/${notification.roomId}}`}
                                 showActions={false}
                                 kinds={{

@@ -9,16 +9,12 @@
 
 body{
   font-family: var(--font-general-sans);
+  background-color: #50ffb0;
 }
 
 
 /* ========================================== TAILWIND STYLES */
 @layer base {
-  :root {
-    background: #F6ECCA;
-    color: #fff;
-    margin: 0;
-  }
 
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
@@ -118,7 +114,7 @@ body{
   }
 
   .document-title-input {
-    @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base text-white shadow-none font-bold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-left !important;
+    @apply min-w-[78px] border-none text-[24px] bg-transparent px-0 text-left text-base text-white shadow-none font-bold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-left !important;
   }
 
   .document-title {
@@ -213,27 +209,35 @@ body{
 
 /* ======================== Liveblocks Override */
 .lb-root {
-  --lb-accent-subtle: #0b1527;
+  --lb-accent-subtle: #50ffb0;
   --lb-radius: 0px;
-  --lb-dynamic-background: #1b2840;
 }
 
 .lb-comment,
 .lb-thread-comments,
 .lb-composer,
 .lb-comment-reaction {
-  background-color: #0f1c34;
-  color: #fff;
+  background-color: transparent;
+  color: black;
 }
 
 .lb-button {
-  --lb-foreground-moderate: #fff;
+  --lb-foreground-moderate: black;
 }
 
 .lb-button:where([data-variant="primary"]) {
-  background-color: #161e30;
-  color: #b4c6ee;
-  padding: 8px;
+  border: 4px solid black;
+  padding: 4px 8px;
+  margin-left: 5px;
+  background-color: #F8FE1F;
+  color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease;
+}
+
+.lb-button:where([data-variant="primary"]):active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .lb-button:where(
@@ -246,7 +250,12 @@ body{
           )
       )
   ) {
-  color: #b4c6ee;
+  border: 4px solid black;
+  padding: 4px 8px;
+  margin-left: 5px;
+  background-color: #F8FE1F;
+  color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .lb-button:where(
@@ -255,9 +264,17 @@ body{
     [aria-expanded="true"],
     [aria-selected="true"]
   ) {
-  --lb-button-background: #161e30;
+  border: 4px solid black;
+  padding: 4px 8px;
+  margin-left: 5px;
+  background-color: #e9ef1a;
+  color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
 
-  color: #b4c6ee;
+.lb-button:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
 }
 
 .lb-inbox-notification-list-item:where(:not(:last-of-type)) {
@@ -268,7 +285,7 @@ body{
 .lb-dropdown-item,
 .lb-dropdown-item-icon,
 .lb-composer-editor {
-  color: #fff;
+  color: black;
 }
 
 .lb-composer-action {
@@ -276,32 +293,33 @@ body{
 }
 
 .lb-comment-content {
-  background: #ffff;
+  background: white;
   margin-top: 16px;
   padding: 12px;
-  border-radius: 4px;
+  border: 4px solid black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   font-size: 14px;
 }
 
 .lb-comment-date,
 .lb-lexical-mention-suggestion-user,
 .lb-composer-suggestions-list-item,
-.lb-inbox-notification-date,
-.lb-comment-author {
-  color: #b4c6ee;
+.lb-inbox-notification-date {
+  color: black;
 }
 
-.data-liveblocks-portal {
-  color: #b4c6ee !important;
+.lb-comment-author {
+  color: black;
+  font-weight: 600;
 }
 
 .lb-root:where(:not(.lb-root .lb-root)) {
-  --lb-dynamic-background: #1b2840;
-  color: #fff;
+  --lb-dynamic-background: white;
+  color: black;
 }
 
 .lb-composer-editor :where([data-placeholder]) {
-  color: #b4c6ee;
+  color: #666;
   font-size: 14px;
 }
 
@@ -310,9 +328,44 @@ body{
 }
 
 .lb-elevation {
-  background: #0f1c34;
+  background: white;
+  border: 4px solid black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
+.lb-avatar {
+  border: 2px solid black;
+}
+
+.lb-composer {
+  padding: 0;
+}
+
+.lb-thread {
+  padding: 0;
+}
+
+.lb-thread-list {
+  gap: 16px;
+}
+
+.lb-comment {
+  padding: 0;
+}
+
+.lb-dropdown-content {
+  border: 4px solid black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  background: white;
+}
+
+.lb-dropdown-item {
+  transition: background-color 0.2s ease;
+}
+
+.lb-dropdown-item:hover {
+  background-color: #F8FE1F;
+}
 
 
 

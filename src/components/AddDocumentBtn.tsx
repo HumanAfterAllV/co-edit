@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { createDocument } from "@/lib/actions/room.actions";
 import { useRouter } from "next/navigation";
+
+import { createDocument } from "@/lib/actions/room.actions";
+
+import { Button } from "./ui/button";
 
 export default function AddDocumentBtn({userId, email}: AddDocumentBtnProps): React.JSX.Element {
     const router = useRouter();

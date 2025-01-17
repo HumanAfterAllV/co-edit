@@ -182,6 +182,3 @@ export const getUserRoomStats = async (email: string) => {
         };
     }
 };
-
-
-//TODO: Add actions for search documents

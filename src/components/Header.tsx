@@ -1,33 +1,48 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import { SignedIn, UserButton } from "@clerk/nextjs"
+
+import { Card, CardTitle } from "./ui/card"
+
 import AddDocumentBtn from "./AddDocumentBtn"
 import Notifications from "./Notifications"
-import { SignedIn, UserButton } from "@clerk/nextjs"
 
 export default function Header({userId, email}: AddDocumentBtnProps): React.JSX.Element {
     return(
         <Card className="border-custom-cards mb-4">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <CardTitle>
-                    <Link href="/" className="md:flex-1">
-                        <Image
-                            src="/assets/icons/logo-co_edit.svg"
-                            alt="Logo"
-                            width={160}
-                            height={32}
-                            className="hidden md:block"
-                        />
-                    </Link>            
-                </CardTitle>
-                <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <AddDocumentBtn userId={userId} email={email}/>
-                    <div className="flex items-center gap-2 lg:gap-4 pr-2">
-                        <Notifications /> 
-                        <SignedIn>
-                            <UserButton />
-                        </SignedIn>
+            <div className="p-4">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <CardTitle className="flex items-center justify-between sm:justify-start sm:flex-1">
+                        <Link href="/" className="block">
+                            <Image
+                                src="/assets/images/logo-co_edit.png"
+                                alt="Logo"
+                                width={120}
+                                height={24}
+                                className="block sm:hidden"
+                            />
+                        </Link>            
+                        <Link href="/" className="block">
+                            <Image
+                                src="/assets/images/logo-co_edit.png"
+                                alt="Logo"
+                                width={160}
+                                height={32}
+                                className="hidden sm:block"
+                            />
+                        </Link>            
+                    </CardTitle>
+                    <div className="flex items-center justify-between sm:items-end gap-4">
+                        <div className="order-1 sm:order-none">
+                            <AddDocumentBtn userId={userId} email={email}/>
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            <Notifications /> 
+                            <SignedIn>
+                                <UserButton />
+                            </SignedIn>
+                        </div>
                     </div>
                 </div>
             </div>

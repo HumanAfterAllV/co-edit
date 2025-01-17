@@ -57,7 +57,7 @@ body {
 }
 
 .editor-inner {
-  background: #FFF9E5;
+  background: white;
   position: relative;
 }
 
@@ -65,6 +65,7 @@ body {
   min-height: 400px;
   resize: none;
   font-size: 15px;
+  font-family: monospace;
   caret-color: rgb(5, 5, 5);
   position: relative;
   tab-size: 1;
@@ -327,15 +328,22 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .toolbar button.toolbar-item {
-  border: 0;
-  display: flex;
-  background: none;
-  border-radius: 0px;
-  padding: 8px;
-  cursor: pointer;
-  vertical-align: middle;
+  border: 4px solid black;
+  padding: 4px;
+  margin-left: 5px;
+  background-color: #F8FE1F;
+  color: black;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
 }
 
+.toolbar button.toolbar-item:hover {
+  background-color: #e9ef1a;
+}
+
+.toolbar button.toolbar-item:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+}
 .toolbar button.toolbar-item:disabled {
   cursor: not-allowed;
 }
@@ -372,9 +380,9 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .toolbar .divider {
-  width: 1px;
-  background-color: #E4DBBA;
-  margin: 0 4px;
+  width: 4px;
+  background-color: black;
+  margin: 0 5px 0 10px;
 }
 
 .toolbar .toolbar-item .text {
@@ -393,13 +401,13 @@ pre::-webkit-scrollbar-thumb {
 
 .toolbar .toolbar-item .icon {
   display: flex;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   user-select: none;
   margin-right: 8px;
   line-height: 16px;
   background-size: contain;
-  fill: #2E2E2E;
+  fill: black;
 }
 
 

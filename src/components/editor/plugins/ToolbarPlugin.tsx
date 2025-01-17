@@ -172,7 +172,6 @@ export default function ToolbarPlugin() {
       >
         <i className="format h3" />
       </button>
-      <Divider />
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
@@ -209,7 +208,6 @@ export default function ToolbarPlugin() {
       >
         <i className="format strikethrough" />
       </button>
-      <Divider />
       <button
         onClick={() => {
           editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');

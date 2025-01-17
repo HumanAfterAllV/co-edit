@@ -2,10 +2,13 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import UserTypeSelector from "./UsertTypeSelector";
-import { Button } from "./ui/button";
+
 import { removeCollaborator, updateDocumentAccess } from "@/lib/actions/room.actions";
-import { Trash, Trash2 } from "lucide-react";
+
+import { Button } from "./ui/button";
+import { Trash2 } from "lucide-react";
+
+import UserTypeSelector from "./UsertTypeSelector";
 
 export default function Collaborator({roomId, creatorId, collaborator, user, email}: CollaboratorProps): React.JSX.Element {
 
